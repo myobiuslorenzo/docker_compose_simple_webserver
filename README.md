@@ -29,11 +29,11 @@ users, которая хранит столбцы name и age с помощью 
 возвращает JSON {"status": "OK"}, стат. 200 \
 Подключиться к БД и посмотреть ее руками можно с помощью комманд: \
 <code>'''
-docker exec -it shpuntenkool-hwdocker_db_1  mysql -uroot -p
+docker exec -it shpuntenkool-hwdocker_db_1  mysql -uroot -p \
 docker exec -it shpuntenkool-hwdocker_db_1  mysql sh
 '''
 </code>
-В первом варианте можно писать sql-запросы, во втором подключение к linux-терминалу. \
+В первом варианте можно писать sql-запросы, во втором подключение к linux-терминалу. 
 
 **ПРО СЕТИ** \
 Для создания macvlan-сети я пыталась использовать скрипт net.sh \
@@ -53,7 +53,7 @@ docker exec -it shpuntenkool-hwdocker_db_1  mysql sh
 В стандартной сети проблем нет и все работает нормально. \
 Запускать с помощью последовательных команд: \
 <code>'''
-docker-compose build 
+docker-compose build \
 docker-compose up 
 '''
 </code>
