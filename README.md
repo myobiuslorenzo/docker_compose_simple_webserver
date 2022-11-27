@@ -30,7 +30,6 @@ users, которая хранит столбцы name и age с помощью 
 Подключиться к БД и посмотреть ее руками можно с помощью комманд: \
 <code>
 docker exec -it shpuntenkool-hwdocker_db_1  mysql -uroot -p 
-  
 docker exec -it shpuntenkool-hwdocker_db_1  mysql sh
 
 </code>
