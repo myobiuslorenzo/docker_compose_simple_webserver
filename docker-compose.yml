@@ -1,0 +1,81 @@
+version: '3.5'
+
+services:
+  db:
+    image: mysql
+    ports:
+      - "3306:80"
+    command:  ["--default-authentication-plugin=mysql_native_password"]
+    restart: "no"
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_PASSWORD: "password"
+      MYSQL_USER: mysql_database
+      MYSQL_DATABASE: mysql_database
+    volumes:
+      - sql_data:/var/lib/mysql
+      - ${PWD}/sql_init:/docker-entrypoint-initdb.d
+#    networks:
+#      - outside
+
+  flask:
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - "5000:5000"
+    command:
+    - ./wait-for-it.sh
+    - db:3306
+    - --timeout=360
+    - --
+    - python3
+    - app.py
+    - --
+    - shutdown
+    - -s
+    build:
+      context: ./
+      dockerfile: services/filler/Dockerfile
+    restart: on-failure
+    volumes:
+      - ${PWD}/data.csv:/app/data.csv
+      - ${PWD}/wait-for-it.sh:/app/wait-for-it.sh
+    stop_signal: SIGKILL
+    stop_grace_period: 1800s
+#    networks:
+#      - outside
+
+  website:
+      depends_on:
+        - db
+      links:
+        - db
+      ports:
+        - "8000:8000"
+      command:
+        - ./wait-for-it.sh
+        - db:3306
+        - --timeout=360
+        - --
+        - python3
+        - app.py
+      build:
+        context: ./
+        dockerfile: services/webservice/Dockerfile
+      restart: on-failure
+      volumes:
+        - ${PWD}/wait-for-it.sh:/app/wait-for-it.sh
+#      networks:
+#        - outside
+volumes:
+  sql_data:
+
+#networks:
+#  outside:
+#    external: true
+#    name: macnet
+
+
+
