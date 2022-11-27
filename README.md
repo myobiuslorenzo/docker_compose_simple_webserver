@@ -28,10 +28,11 @@ users, которая хранит столбцы name и age с помощью 
 Страница health для сервера 3 есть проверка его работоспособности, \
 возвращает JSON {"status": "OK"}, стат. 200 \
 Подключиться к БД и посмотреть ее руками можно с помощью комманд: \
-<code>'''
-docker exec -it shpuntenkool-hwdocker_db_1  mysql -uroot -p \
+<code>
+docker exec -it shpuntenkool-hwdocker_db_1  mysql -uroot -p 
+  
 docker exec -it shpuntenkool-hwdocker_db_1  mysql sh
-'''
+
 </code>
 В первом варианте можно писать sql-запросы, во втором подключение к linux-терминалу. 
 
@@ -52,10 +53,10 @@ docker exec -it shpuntenkool-hwdocker_db_1  mysql sh
 (p.s. для этого необходимо запустить net.sh перед подниманием контейнеров !!)
 В стандартной сети проблем нет и все работает нормально. \
 Запускать с помощью последовательных команд: \
-<code>'''
+<code>
 docker-compose build
 
 docker-compose up 
-'''
+
 </code>
 В последней команде -d скроет логи. 
