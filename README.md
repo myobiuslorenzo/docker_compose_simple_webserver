@@ -55,7 +55,8 @@ docker exec -it shpuntenkool-hwdocker_db_1  mysql sh
 <code>'''
 docker-compose build
 '''
-'''
+</code>
+<code>'''
 docker-compose up 
 '''
 </code>
